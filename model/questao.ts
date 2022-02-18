@@ -1,14 +1,15 @@
+import RespostaModel from "./resposta"
+
 export default class QuestaoModel {
     #id: Number
     #enunciado: string
-    #resposta: any[]
+    #respostas: RespostaModel[]
     #acertou: boolean
-    // #respondida: boolean
 
-    constructor(id: number, enunciado: string, resposta: any[], acertou = false) {
+    constructor(id: number, enunciado: string, respostas: RespostaModel[], acertou = false) {
         this.#id = id
         this.#enunciado = enunciado
-        this.#resposta = resposta
+        this.#respostas = respostas
         this.#acertou = acertou
     }
 
@@ -20,8 +21,8 @@ export default class QuestaoModel {
         return this.#enunciado
     }
     
-    get resposta() {
-        return this.#resposta
+    get respostas() {
+        return this.#respostas
     }
     
     get acertou() {
@@ -29,7 +30,9 @@ export default class QuestaoModel {
     }
 
     get respondida() {
-        //FIXME: implementar esse
+        for(let resposta of this.#respostas) {
+            if(resposta.revelada) return true
+        }
         return false
     }
 }
