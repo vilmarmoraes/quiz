@@ -18,7 +18,7 @@ export default class RespostaModel {
     }
 
     get valor() {
-        return this.valor        
+        return this.#valor        
     }
 
     get certa() {
