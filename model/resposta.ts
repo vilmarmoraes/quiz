@@ -22,7 +22,7 @@ export default class RespostaModel {
     }
 
     get certa() {
-        return this.certa
+        return this.#certa
     }
 
     get revelada() {
