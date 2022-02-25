@@ -18,15 +18,23 @@ export default function Home() {
     setQuestao(questao.respoderCom(indice))
   }
 
+  function tempoEsgotado() {
+    if(questao.naoRespondida) {
+      setQuestao(questao.respoderCom(-1))
+    }    
+  }
+
   return (
     <div style={{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh'
+      height: '100vh',
+      //backgroundColor: 'blue'
     }}>
       <Questao valor={questao} 
-      respostaFornecida={respostaFornecida} />
+      respostaFornecida={respostaFornecida} 
+      tempoEsgotado={tempoEsgotado} />
     </div>
     
   )
