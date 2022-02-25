@@ -3,7 +3,11 @@ import QuestaoModel from "../model/questao";
 import Enunciado from "./Enunciado";
 import Resposta from "./Resposta";
 import Temporizador from "./Temporizador";
- 
+
+/*
+Array que tem a letra e a cor de cada resposta que aparecerá abaixo 
+do enunciado da questão
+*/
 const letras = [
     {valor: "A", cor: '#F2C866' },
     {valor: "B", cor: '#F266BA' },
@@ -11,13 +15,16 @@ const letras = [
     {valor: "D", cor: '#BCE596' },
 ]
 
+//
 interface QuestaoProps {
     valor: QuestaoModel
     respostaFornecida: (indice: number) => void
     tempoEsgotado: () => void
 }
+
 export default function Questao(props: QuestaoProps) {
     const questao = props.valor
+
 
     function renderizarRespostas() {
         return questao.respostas.map((resposta, i) => {
@@ -33,10 +40,14 @@ export default function Questao(props: QuestaoProps) {
             )
         })
     }
+
+
     return (
         <div className={styles.questao}>
             <Enunciado texto={questao.enunciado}/>
-            <Temporizador duracao={10} tempoEsgotado={props.tempoEsgotado}/>
+            <Temporizador key={questao.id} 
+                duracao={10} 
+                tempoEsgotado={props.tempoEsgotado} />
             {renderizarRespostas()}
         </div>
     )

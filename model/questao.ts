@@ -4,7 +4,7 @@ import RespostaModel from "./resposta"
 export default class QuestaoModel {
     #id: number
     #enunciado: string
-    #respostas: RespostaModel[]
+    #respostas: RespostaModel[] //variavel que recebe um lista de respostas
     #acertou: boolean
 
     constructor(id: number, enunciado: string, respostas: RespostaModel[], acertou = false) {
@@ -30,13 +30,16 @@ export default class QuestaoModel {
         return this.#acertou
     }
 
+    //metodo que verifica se a questão não esta respondida
     get naoRespondida() {
         return !this.respondida
     }
 
+    //metodo que verifica se a questão esta respondida
     get respondida() {
         for(let resposta of this.#respostas) {
-            if(resposta.revelada) return true
+            if(resposta.revelada == true) return true
+            //if(resposta.revelada) return true
         }
         return false
     }
@@ -49,15 +52,15 @@ export default class QuestaoModel {
             return deveRevelar ? resposta.revelar() : resposta
         })
         return new QuestaoModel(this.id, this. enunciado, respostas, acertou)
-
     }
 
-
+    //método que embaralha as resposta e passa essa lista pra uma nova questão
     embaralharRespostas(): QuestaoModel {
         let respostasEmbaralhadas = embaralhar(this.#respostas)
         return new QuestaoModel(this.#id, this.#enunciado, respostasEmbaralhadas, this.#acertou )
     }
 
+    //metodo que transforma uma questão num objeto json
     paraObjeto() {
         return {
             id: this.#id,
@@ -67,6 +70,4 @@ export default class QuestaoModel {
             acertou: this.#acertou
         }
     }
-
-
 }

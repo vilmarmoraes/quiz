@@ -13,14 +13,17 @@ const questaoMock = new QuestaoModel(1, "Qual é a Melhor cor?", [
 export default function Home() {
   const [questao, setQuestao] = useState(questaoMock)
 
+
+  //Pega o indice da resposta escolhida e muda o estado da questão
   function respostaFornecida(indice: number) {
     //console.log(indice)
     setQuestao(questao.respoderCom(indice))
   }
 
+  //Após o temporizador terminar executa esse método
   function tempoEsgotado() {
     if(questao.naoRespondida) {
-      setQuestao(questao.respoderCom(-1))
+      setQuestao(questao.respoderCom(-1))//Após tempo esgotado mostra a resposta correta
     }    
   }
 
@@ -33,8 +36,8 @@ export default function Home() {
       //backgroundColor: 'blue'
     }}>
       <Questao valor={questao} 
-      respostaFornecida={respostaFornecida} 
-      tempoEsgotado={tempoEsgotado} />
+        respostaFornecida={respostaFornecida} 
+        tempoEsgotado={tempoEsgotado} />
     </div>
     
   )
