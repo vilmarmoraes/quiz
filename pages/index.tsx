@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Botao from '../components/Botao'
 import Questao from '../components/Questao'
 import QuestaoModel from '../model/questao'
 import RespostaModel from '../model/resposta'
@@ -12,7 +13,7 @@ const questaoMock = new QuestaoModel(1, "Qual é a Melhor cor?", [
 
 export default function Home() {
   const [questao, setQuestao] = useState(questaoMock)
-
+  
 
   //Pega o indice da resposta escolhida e muda o estado da questão
   function respostaFornecida(indice: number) {
@@ -30,14 +31,17 @@ export default function Home() {
   return (
     <div style={{
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
       //backgroundColor: 'blue'
     }}>
       <Questao valor={questao} 
+      tempoPraResposta={10}
         respostaFornecida={respostaFornecida} 
         tempoEsgotado={tempoEsgotado} />
+        <Botao texto="Próxima" href="/resultado"/>
     </div>
     
   )
