@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import Botao from '../components/Botao'
-import Questao from '../components/Questao'
+import Questionario from '../components/Questionario'
 import QuestaoModel from '../model/questao'
 import RespostaModel from '../model/resposta'
 
@@ -11,38 +10,26 @@ const questaoMock = new QuestaoModel(1, "Qual é a Melhor cor?", [
   RespostaModel.certa('Preta')
 ])
 
+const BASE_URL = 'http://localhost:300/api'
+
 export default function Home() {
   const [questao, setQuestao] = useState(questaoMock)
   
 
-  //Pega o indice da resposta escolhida e muda o estado da questão
-  function respostaFornecida(indice: number) {
-    //console.log(indice)
-    setQuestao(questao.respoderCom(indice))
+  function questaoRespondida(questao: QuestaoModel) {
+    
   }
 
-  //Após o temporizador terminar executa esse método
-  function tempoEsgotado() {
-    if(questao.naoRespondida) {
-      setQuestao(questao.respoderCom(-1))//Após tempo esgotado mostra a resposta correta
-    }    
+  function irPraProximoPasso() {
+
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      //backgroundColor: 'blue'
-    }}>
-      <Questao valor={questao} 
-      tempoPraResposta={10}
-        respostaFornecida={respostaFornecida} 
-        tempoEsgotado={tempoEsgotado} />
-        <Botao texto="Próxima" href="/resultado"/>
-    </div>
-    
+      <Questionario
+      questao={questao}
+      ultima={false}
+      questaoRespondida={questaoRespondida}
+      irPraProximoPasso={irPraProximoPasso}
+      />    
   )
 }
